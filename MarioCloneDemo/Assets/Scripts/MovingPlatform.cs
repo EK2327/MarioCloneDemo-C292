@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTwo : MonoBehaviour
+public class movingPlatform : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
-    bool moveUp = true;
-    [SerializeField] float moveTime;
+    bool moveRight = true;
+    [SerializeField]float moveTime;
     float curTime = 0;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -18,20 +17,20 @@ public class EnemyTwo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (moveUp)
+        if (moveRight)
         {
-            transform.Translate(Vector2.up * moveSpeed * Time.deltaTime);
+            transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
             curTime += Time.deltaTime;
         }
         else
         {
-            transform.Translate(Vector2.down * moveSpeed * Time.deltaTime);
-                curTime -= Time.deltaTime;
+            transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
+            curTime -= Time.deltaTime;
         }
-        
+
         if (curTime > moveTime || curTime < 0)
         {
-            moveUp = !moveUp;
+            moveRight = !moveRight;
         }
     }
 }

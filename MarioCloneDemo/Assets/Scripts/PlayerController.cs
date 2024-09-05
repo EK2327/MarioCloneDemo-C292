@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpForce;
+    private int jumpsLeft = 2;
     
     private Rigidbody2D rb;
 
@@ -19,9 +20,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && jumpsLeft > 0)
         {
             Jump();
+            jumpsLeft -= 1;
         }
     }
 
@@ -34,5 +36,13 @@ public class PlayerController : MonoBehaviour
     private void Jump() 
     {
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            jumpsLeft = 2; 
+        }
     }
 }
