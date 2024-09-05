@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpForce;
     private int jumpsLeft = 2;
+    private float startingX;
+    private float startingY;
     
     private Rigidbody2D rb;
 
@@ -14,6 +16,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        startingX = transform.position.x;
+        startingY = transform.position.y;
     }
 
     // Update is called once per frame
@@ -43,6 +47,11 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.tag == "Ground")
         {
             jumpsLeft = 2; 
+        }
+
+        if(collision.gameObject.tag == "Enemy")
+        {
+            transform.position = new Vector3(startingX, startingY, 0);
         }
     }
 }
