@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -33,6 +34,11 @@ public class PlayerController : MonoBehaviour
             Jump();
             jumpsLeft -= 1;
         }
+
+        if (health <= 0)
+        {
+            SceneManager.LoadScene("Scene0");
+        }
     }
 
     private void Move() 
@@ -48,17 +54,18 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground")
         {
-            jumpsLeft = 1; 
+            jumpsLeft = 1;
         }
 
-        if(collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             transform.position = new Vector3(startingX, startingY, 0);
             health -= 1;
             UIManager.instance.SetHealth(health);
         }
     }
+
 
 }
