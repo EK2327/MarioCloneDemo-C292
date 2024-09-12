@@ -6,9 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpForce;
+    [SerializeField] int maxHealth;
     private int jumpsLeft = 1;
     private float startingX;
     private float startingY;
+    private int health;
     
     private Rigidbody2D rb;
 
@@ -18,6 +20,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         startingX = transform.position.x;
         startingY = transform.position.y;
+        health = maxHealth;
+        UIManager.instance.SetHealth(health);
     }
 
     // Update is called once per frame
@@ -52,6 +56,9 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.tag == "Enemy")
         {
             transform.position = new Vector3(startingX, startingY, 0);
+            health -= 1;
+            UIManager.instance.SetHealth(health);
         }
     }
+
 }

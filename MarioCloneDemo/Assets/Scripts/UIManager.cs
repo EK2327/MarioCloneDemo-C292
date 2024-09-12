@@ -8,6 +8,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI lifeText;
     int score = 0;
     public static UIManager instance;
     // Start is called before the first frame update
@@ -29,5 +30,10 @@ public class UIManager : MonoBehaviour
     {
         score += amount;
         scoreText.text = "x" + score;
+    }
+
+    public void SetHealth(int health)
+    {
+        lifeText.text = "Lives: " + health;
     }
 }
