@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpForce;
-    private int jumpsLeft = 2;
+    private int jumpsLeft = 1;
     private float startingX;
     private float startingY;
     
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ground")
         {
-            jumpsLeft = 2; 
+            jumpsLeft = 1; 
         }
 
         if(collision.gameObject.tag == "Enemy")
